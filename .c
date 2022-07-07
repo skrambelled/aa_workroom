@@ -19,7 +19,7 @@ void create() {
   set_outdoors(0);
   
   set_short("Maker's Forge");
-  set_long("Maker's Forge");
+  set_long("This is Maker's Forge.");
     
   set_sound("In the distance you can hear someone singing.");
   set_smell("You smell iron and wine.");
@@ -28,7 +28,7 @@ void create() {
     "item":  "The anvil is rather large.",
     "noget": "You cannot possibly lift that up!",
     "smell": "It smells of hot iron.",
-    "touch": "It feels warm and well used. Kinda.",
+    "touch": "It feels warm and well used.",
     "sound": "It sizzles.",
     "taste": "The anvil burns your tongue!"]));
   
