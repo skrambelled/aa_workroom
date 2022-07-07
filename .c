@@ -1,7 +1,10 @@
 #pragma strict_types
 
+#include <guilds.h>
+
 #define ME "maker"
 #define MYRACE "martian"
+#define MYSPIRIT "yeti"
 #define X_COORD 41
 #define Y_COORD 25
 
@@ -42,34 +45,44 @@ void create() {
 
 void init() {
   room::init();
-  
-  if((string)this_interactive()->query_real_name() == ME) {
-    // initialize keep_alive call
-    while(remove_call_out("keep_alive") > -1);
-    call_out("keep_alive", 60);
-    
-    // set bear spirit
-    if(present("bear's claw", this_interactive())) {
-      "w/taver/guild/room/guildhall"->set_member_spirit(ME, "yeti");
-      writef("Bear Spirit set to: yeti.");
-    }
 
-    // set race
-    if((string)this_player()->query_race() != MYRACE) {
-      this_player()->set_race(MYRACE);
-      writef("Race set to: "+MYRACE);
-    }
+  object player_object;
+  string player_name;
+
+  player_object = (object)this_interactive();
+  player_name = (string)player_object->query_real_name();
+  
+  if(player_name != ME)
+    return;
+  
+  // initialize keep_alive call
+  while(remove_call_out("keep_alive") > -1);
+  call_out("keep_alive", 60);
+  
+  // set bear spirit
+  if(present("bear's claw", player_object)) {
+    if((string)BEAR->query_member_spirit(player_name) != MYSPIRIT)
+      BEAR->set_member_spirit(player_name, MYSPIRIT);
+    else
+      writef("Bear Spirit set to: "+MYSPIRIT.);
   }
+
+  // set race
+  if((string)player_object->query_race() != MYRACE) {
+    player_object->set_race(MYRACE);
+    writef("Race set to: "+MYRACE);
+  }
+
 }
   
 void keep_alive() {
-  object player;
+  object player_object;
 
-  player = find_player("maker");
+  player_object = find_player("maker");
 
-  if(player && interactive(player)) {
-    if(query_idle(player) > 60)
-      tell_object(player, ">\n");
+  if(player_object && interactive(player_object)) {
+    if(query_idle(player_object) > 60)
+      tell_object(player_object, ">\n");
     else
       call_out("keep_alive", 60);
   }
