@@ -45,13 +45,15 @@ void init() {
     call_out("keep_alive", 60);
     
     // set bear spirit
-    if(present("bear's claw", this_interactive()))
+    if(present("bear's claw", this_interactive())) {
       "w/taver/guild/room/guildhall"->set_member_spirit(ME, "yeti");
+      writef("Bear Spirit set to: yeti.");
+    }
 
     // set race
     if((string)this_player()->query_race() != MYRACE) {
       this_player()->set_race(MYRACE);
-      writef("Race set to: "+MYRACE+".\n");
+      writef("Race set to: "+MYRACE);
     }
   }
 }
