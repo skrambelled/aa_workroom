@@ -48,6 +48,7 @@ void init() {
     if(present("bear's claw", this_interactive()))
       "w/taver/guild/room/guildhall"->set_member_spirit(ME, "yeti");
 
+    // set race
     if((string)this_player()->query_race() != MYRACE) {
       this_player()->set_race(MYRACE);
       writef("Race set to: "+MYRACE+".\n");
