@@ -14,7 +14,7 @@ void create() {
   set_sound("In the distance you can hear someone singing.");
   set_smell("You smell iron and wine.");
   
-  add_senese( ({"anvil", "large anvil", "fairly large anvil"}), ([
+  add_senses( ({"anvil", "large anvil", "fairly large anvil"}), ([
     "item":  "The anvil is rather large.",
     "noget": "You cannot possibly lift that up!",
     "smell": "It smells of hot iron.",
@@ -70,7 +70,7 @@ void create() {
   }
   
   keep_alives = ({});
-  
+
   add_item("sign", "You could 'read sign'.");
 }
 
