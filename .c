@@ -60,10 +60,9 @@ void init() {
   call_out("keep_alive", 60);
   
   // set bear spirit
-  if(present("bear's claw", player_object)) {
-    if((string)BEAR->query_member_spirit(player_name) != MYSPIRIT)
+  if(present("bear's claw", player_object) &&
+  (string)BEAR->query_member_spirit(player_name) != MYSPIRIT) {
       BEAR->set_member_spirit(player_name, MYSPIRIT);
-    else
       writef("Bear Spirit set to: "+MYSPIRIT);
   }
 
