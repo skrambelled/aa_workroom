@@ -64,7 +64,7 @@ void init() {
     if((string)BEAR->query_member_spirit(player_name) != MYSPIRIT)
       BEAR->set_member_spirit(player_name, MYSPIRIT);
     else
-      writef("Bear Spirit set to: "+MYSPIRIT.);
+      writef("Bear Spirit set to: "+MYSPIRIT);
   }
 
   // set race
