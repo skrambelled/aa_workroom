@@ -36,13 +36,13 @@ void create() {
 void init() {
   ::init();
   
-  if((string)this_player()->query_real_name() == "maker") {
+  if((string)this_interactive()->query_real_name() == "maker") {
     // initialize keep_alive call
     while(remove_call_out("keep_alive") > -1);
     call_out("keep_alive", 60);
     
     // set bear spirit
-    if(present("bear's claw", this_player()))
+    if(present("bear's claw", this_interactive()))
       "w/taver/guild/room/guildhall"->set_member_spirit("maker","yeti");
   }
 }
