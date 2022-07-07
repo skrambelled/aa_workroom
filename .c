@@ -33,6 +33,28 @@ void create() {
     "taste": "Why on Oerthe would you attempt to taste a WHITE HOT FLAME?" ]));
 }
 
+void init() {
+  ::init();
+  
+  if((string)this_player()->query_real_name() == "maker") {
+    while(remove_call_out("keep_alive") > -1);
+    call_out("keep_alive", 60);
+  }
+}
+  
+void keep_alive() {
+  object player;
+  
+  player = find_player("maker");
+
+  if(player && interactive(player)) {
+    if(query_idle(player) > 60)
+      tell_object(player, ">\n");
+    else
+      call_out("keep_alive", 60);
+  }
+}
+
 
 /*
 
