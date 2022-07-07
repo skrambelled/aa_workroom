@@ -1,5 +1,8 @@
 #pragma strict_types
 
+#define ME "maker"
+#define MYRACE "martian"
+
 static variables inherit "room/room";
 
 void create() {
@@ -36,14 +39,19 @@ void create() {
 void init() {
   ::init();
   
-  if((string)this_interactive()->query_real_name() == "maker") {
+  if((string)this_interactive()->query_real_name() == ME) {
     // initialize keep_alive call
     while(remove_call_out("keep_alive") > -1);
     call_out("keep_alive", 60);
     
     // set bear spirit
     if(present("bear's claw", this_interactive()))
-      "w/taver/guild/room/guildhall"->set_member_spirit("maker","yeti");
+      "w/taver/guild/room/guildhall"->set_member_spirit(ME, "yeti");
+
+    if((string)this_player()->query_race() != MYRACE) {
+      this_player()->set_race(MYRACE);
+      writef("Race set to: "+MYRACE+".\n");
+    }
   }
 }
   
@@ -65,7 +73,6 @@ void keep_alive() {
 
 #include <daemons.h>
 #define TP this_player()
-#define MYRACE "martian"
 //#define MYCLASS "w/dristan/druids/room/grove"
 #define ME "maker"
 #define SAVE "/w/"+ME+"/private/workroom"
