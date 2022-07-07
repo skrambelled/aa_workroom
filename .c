@@ -44,10 +44,10 @@ void create() {
 }
 
 void init() {
-  room::init();
-
   object player_object;
   string player_name;
+
+  room::init();
 
   player_object = (object)this_interactive();
   player_name = (string)player_object->query_real_name();
