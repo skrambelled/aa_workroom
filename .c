@@ -2,6 +2,8 @@
 
 #define ME "maker"
 #define MYRACE "martian"
+#define X_COORD 41
+#define Y_COORD 25
 
 static variables inherit "room/room";
 
@@ -71,6 +73,11 @@ void keep_alive() {
   }
 }
 
+int query_snoop_protected(){ return 1; } 
+int query_x_coord(){ return X_COORD; }
+int query_y_coord(){ return Y_COORD; }
+
+
 
 /*
 
@@ -80,8 +87,6 @@ void keep_alive() {
 #define ME "maker"
 #define SAVE "/w/"+ME+"/private/workroom"
 #define LOG "/w/"+ME+"/private/log/workroom_log"
-#define X_COORD 41
-#define Y_COORD 25
 #define LOG_PATH 0 // keys in the mapping logs
 #define LOG_DATE 1
 
@@ -153,8 +158,5 @@ void init() {
     }
 }
 
-int query_snoop_protected(){ return 1; } 
-int query_x_coord(){ return X_COORD; }
-int query_y_coord(){ return Y_COORD; }
 
 */
