@@ -10,6 +10,8 @@ static variables inherit "room/room";
 void create() {
   room::create();
 
+  if(is_clone()){destruct(this_object()); return;}
+
   set_light(1);
   set_outdoors(0);
   
@@ -39,7 +41,7 @@ void create() {
 }
 
 void init() {
-  ::init();
+  room::init();
   
   if((string)this_interactive()->query_real_name() == ME) {
     // initialize keep_alive call
@@ -76,87 +78,3 @@ void keep_alive() {
 int query_snoop_protected(){ return 1; } 
 int query_x_coord(){ return X_COORD; }
 int query_y_coord(){ return Y_COORD; }
-
-
-
-/*
-
-#include <daemons.h>
-#define TP this_player()
-//#define MYCLASS "w/dristan/druids/room/grove"
-#define ME "maker"
-#define SAVE "/w/"+ME+"/private/workroom"
-#define LOG "/w/"+ME+"/private/log/workroom_log"
-#define LOG_PATH 0 // keys in the mapping logs
-#define LOG_DATE 1
-
-inherit "/w/maker/tools/inv_saver";
-mapping banished;
-
-private nomask mapping logs;
-
-varargs nomask int check_log(string arg);
-private nomask int secure();
-
-static string *keep_alives;
-
-
-void create() {
-  room::create();
-  if(is_clone()){destruct(this_object()); return;}
-  
-  if(!restore_object(SAVE)) {
-    banished = ([]);
-    logs = ([]);
-  }
-  
-  keep_alives = ({});
-
-  add_item("sign", "You could 'read sign'.");
-}
-
-void init() { 
-  room::init();
-  inv_saver::init();
-  add_action("read","read");
-  add_action("map",  "map");
- 
-  if(secure()) {
-    this_player()->remove_hook("move_player","save_me");
-    this_player()->add_hook("move_player", "save_me");
-    add_action("banish", "banish");
-    add_action("unbanish", "unbanish");
-    add_action("add_log", "addlog");
-    add_action("remove_log", "removelog");
-    add_action("check_log", "checklog");
-    keep_alive();
-    if((string)this_player()->query_race() != MYRACE) {
-      this_player()->set_race(MYRACE);
-      writef("Race set to: "+MYRACE+".\n");
-    }
-    if((string)this_player()->query_class() != MYCLASS)
-    {
-      this_player()->set_class(MYCLASS);
-      writef("Class set to: "+MYCLASS+".\n");
-    }
-
-    if(present("bear's claw", find_player(ME)))
-      "w/taver/guild/room/guildhall"->set_member_spirit("maker","yeti");
-    check_log();
-  }
-  else
-    if(this_player()->query_is_player()) {
-      if(this_player()->query_invis()) {
-        if(find_player(ME))
-          tell_object(find_player(ME), "NOTICE: ("+
-          capitalize((string)this_player()->query_real_name())+
-          ") entered your workroom.\n");
-      }
-      log_file(LOG,"["+ctime(time())+"]"+" "+
-        capitalize((string)this_player()->query_real_name())+
-        " entered your workroom.\n");
-    }
-}
-
-
-*/
