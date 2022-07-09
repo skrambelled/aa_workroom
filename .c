@@ -8,6 +8,10 @@
 #define X_COORD 41
 #define Y_COORD 25
 
+#define KEEP_ALIVE_INTERVAL 60
+#define KEEP_ALIVE_IDLE_TIME 120
+#define KEEP_ALIVE_PROMPT ">\n"
+
 static variables inherit "room/room";
 
 void create() {
@@ -57,7 +61,7 @@ void init() {
   
   // initialize keep_alive call
   while(remove_call_out("keep_alive") > -1);
-  call_out("keep_alive", 60);
+  call_out("keep_alive", KEEP_ALIVE_INTERVAL);
   
   // set bear spirit
   if(present("bear's claw", player_object) &&
@@ -80,10 +84,9 @@ void keep_alive() {
   player_object = find_player(ME);
 
   if(player_object) {
-    if(interactive(player_object) && query_idle(player_object) > 60)
-      tell_object(player_object, ">\n");
-    else
-      call_out("keep_alive", 60);
+    if(interactive(player_object) && query_idle(player_object) > KEEP_ALIVE_IDLE_TIME)
+      tell_object(player_object, KEEP_ALIVE_PROMPT);
+    call_out("keep_alive", KEEP_ALIVE_INTERVAL);
   }
 }
 
