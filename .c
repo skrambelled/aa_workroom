@@ -77,10 +77,10 @@ void init() {
 void keep_alive() {
   object player_object;
 
-  player_object = find_player("maker");
+  player_object = find_player(ME);
 
-  if(player_object && interactive(player_object)) {
-    if(query_idle(player_object) > 60)
+  if(player_object) {
+    if(interactive(player_object) && query_idle(player_object) > 60)
       tell_object(player_object, ">\n");
     else
       call_out("keep_alive", 60);
