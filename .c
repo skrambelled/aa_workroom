@@ -8,8 +8,8 @@
 #define X_COORD 41
 #define Y_COORD 25
 
-#define KEEP_ALIVE_INTERVAL 60
-#define KEEP_ALIVE_IDLE_TIME 120
+#define KEEP_ALIVE_INTERVAL 180
+#define KEEP_ALIVE_IDLE_TIME 600
 #define KEEP_ALIVE_PROMPT ">\n"
 
 static variables inherit "room/room";
